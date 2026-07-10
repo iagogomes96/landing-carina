@@ -1,0 +1,589 @@
+/* ==========================================================================
+    1. VARIÁVEIS E RESET
+    ========================================================================== */
+:root {
+    /* Paleta Refinada */
+    --cor-primaria: #2A2640; /* Roxo/Azul muito profundo */
+    --cor-secundaria: #D4AF37; /* Dourado elegante */
+    --cor-secundaria-hover: #F3C93F;
+    --cor-fundo: #F4F2F7; /* Off-white com toque violeta para seções escuras */
+    --cor-fundo-alt: #FFFFFF; /* Branco puro para seções claras */
+    --cor-texto: #4A4A4A; 
+    --cor-texto-claro: #FFFFFF;
+    
+    /* Tipografia */
+    --fonte-titulo: 'Playfair Display', serif;
+    --fonte-texto: 'Lato', sans-serif;
+
+    /* Medidas e Sombras */
+    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --sombra-forte: 0 15px 40px rgba(42, 38, 64, 0.15);
+    --borda-raio: 8px;
+    --espaco-secao: 5rem 1.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Trava de segurança contra barra de rolagem horizontal */
+}
+
+body {
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+    2. TIPOGRAFIA GERAL E UTILITÁRIOS
+    ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-primaria);
+    line-height: 1.2;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titulo-secao {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.titulo-secao::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
+}
+
+.texto-destaque {
+    color: var(--cor-secundaria);
+    font-weight: 700;
+}
+
+/* Divisória sutil entre seções */
+.secao-padrao {
+    padding: var(--espaco-secao);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.bg-branco {
+    background-color: var(--cor-fundo-alt);
+}
+
+/* ==========================================================================
+    3. CABEÇALHO E MENU (Checkbox Hack)
+    ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+header.header-scrolled {
+    background-color: var(--cor-primaria);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 1.5rem;
+}
+
+.logo {
+    color: var(--cor-texto-claro);
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icone {
+    width: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: var(--fonte-titulo);
+}
+
+.logo-icone img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Menu Navegação Desktop */
+.menu-navegacao {
+    display: flex;
+    gap: 20px;
+    align-self: flex-end; 
+    margin-bottom: 5px; 
+}
+
+.menu-navegacao a {
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    font-size: 0.55rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    font-weight: 600;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-block; /* Necessário para o transform scale funcionar */
+}
+
+/* O Hover do Menu */
+.menu-navegacao a:hover {
+    color: var(--cor-secundaria);
+    transform: scale(1.1); /* Zoom sutil de 10% */
+}
+
+/* A cor amarela quando o link está ativo (Scroll Spy) */
+.menu-navegacao a.ativo {
+    color: var(--cor-secundaria);
+}
+
+.contato-rapido {
+    text-align: right;
+    color: var(--cor-texto-claro);
+    font-size: 0.9rem;
+}
+
+.contato-rapido span {
+    display: block;
+    color: var(--cor-secundaria);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Escondendo a checkbox e o botão de menu no desktop */
+#menu-toggle { display: none; }
+.menu-btn { display: none; cursor: pointer; }
+
+.menu-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cor-texto-claro);
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-texto-claro);
+    transition: transform 0.2s, top 0.2s;
+}
+
+.menu-icon::before { top: -8px; }
+.menu-icon::after { top: 8px; }
+
+/* ==========================================================================
+    4. SEÇÃO HERO (Full-bleed Wrapper)
+    ========================================================================== */
+.hero-wrapper {
+    /* Fundo Parallax Místico: Imagem abstrata com um gradiente branco/violeta por cima para suavizar */
+    background-image: 
+                linear-gradient(135deg, rgba(42, 38, 64, 0.85) 0%, rgba(26, 24, 41, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* A mágica do Parallax super leve em CSS */
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+}
+
+#hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 1.5rem;
+    gap: 2rem;
+    width: 100%;
+}
+
+.hero-texto {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-texto h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--cor-secundaria);
+}
+
+.hero-texto p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--cor-texto-claro);
+}
+
+.hero-imagem {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.imagem-destaque {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px 100px 20px 100px; 
+    box-shadow: var(--sombra-forte);
+    object-fit: cover;
+    border: 4px solid var(--cor-fundo-alt);
+    /* Animação de respiração da imagem principal */
+    animation: flutuarImagem 6s ease-in-out infinite;
+}
+
+.hero-imagem::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    background-color: var(--cor-secundaria);
+    border-radius: 100px 20px 100px 20px;
+    top: 15px;
+    left: 15px;
+    z-index: -1;
+    opacity: 0.5;
+    animation: flutuarImagem 6s ease-in-out infinite;
+    animation-delay: 0.5s; /* Sincronia defasada com a foto */
+}
+
+/* Keyframe de Levitação (Puro CSS) */
+@keyframes flutuarImagem {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ==========================================================================
+    5. SEÇÕES: DIPLOMA & SOBRE
+    ========================================================================== */
+.diploma-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+}
+
+.diploma-wrapper img {
+    width: 100%;
+    display: block;
+}
+
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.sobre-imagem {
+    width: 100%; 
+    aspect-ratio: 1 / 1; /* Força um quadrado perfeito independente da resolução */
+    object-fit: cover; /* Faz a foto preencher o quadrado */
+    border-radius: 50%;
+    box-shadow: var(--sombra-card);
+    border: 8px solid var(--cor-secundaria);
+    padding: 10px;
+    background: var(--cor-fundo-alt);
+}
+
+/* ==========================================================================
+    6. SEÇÃO SERVIÇOS (Grid Inteligente e Animação Limpa)
+    ========================================================================== */
+.servicos-grid {
+    display: grid;
+    /* Grid super responsivo e modular com proteção de limite de tela */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.card-servico {
+    background-color: var(--cor-fundo-alt);
+    padding: 2.5rem 1.5rem;
+    border-radius: var(--borda-raio);
+    text-align: center;
+    box-shadow: var(--sombra-card);
+    border-bottom: 4px solid transparent;
+    /* Transição dupla: uma para o mouse passar, outra pro fade-in da revelação */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease, opacity 0.8s ease, translateY 0.8s ease;
+}
+
+.card-servico:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-forte);
+    border-bottom-color: var(--cor-secundaria);
+}
+
+/* Animação em cascata (Limpando o CSS inline) */
+.servicos-grid .card-servico:nth-child(1) { transition-delay: 0s; }
+.servicos-grid .card-servico:nth-child(2) { transition-delay: 0.2s; }
+.servicos-grid .card-servico:nth-child(3) { transition-delay: 0.4s; }
+.servicos-grid .card-servico:nth-child(4) { transition-delay: 0.6s; }
+.servicos-grid .card-servico:nth-child(5) { transition-delay: 0.8s; } /* Preparado para mais */
+
+.icone-servico {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    background-color: #FFF9E6; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor-secundaria);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Animação dos ícones em cascata */
+.animacao-flutuar {
+    animation: flutuarImagem 4s ease-in-out infinite;
+}
+.servicos-grid .card-servico:nth-child(1) .icone-servico { animation-delay: 0s; }
+.servicos-grid .card-servico:nth-child(2) .icone-servico { animation-delay: 1s; }
+.servicos-grid .card-servico:nth-child(3) .icone-servico { animation-delay: 2s; }
+.servicos-grid .card-servico:nth-child(4) .icone-servico { animation-delay: 3s; }
+
+.card-servico h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+.card-servico p { font-size: 0.95rem; color: #666; }
+
+/* ==========================================================================
+    7. SEÇÃO DEPOIMENTOS & MAPA
+    ========================================================================== */
+#depoimentos {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+}
+
+#depoimentos .titulo-secao { color: var(--cor-texto-claro); }
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-card);
+    background: #000;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.mapa-container {
+    margin-top: 2rem;
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    height: 450px;
+}
+
+/* Força o iframe a respeitar a div responsiva */
+.mapa-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+}
+
+/* ==========================================================================
+    8. REVEAL SCROLL (Animação de surgimento)
+    ========================================================================== */
+.revelar {
+    opacity: 0;
+    transform: translateY(40px);
+    /* O delay virá das variáveis do card */
+}
+
+.revelar.ativo {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+    9. RODAPÉ E BOTÃO FLUTUANTE E ÍCONES SOCIAIS
+    ========================================================================== */
+footer {
+    background-color: #1A1829;
+    color: #999;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.9rem;
+}
+
+footer span {
+    color: var(--cor-secundaria);
+}
+
+.btn-whatsapp-flutuante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-whatsapp-flutuante:hover {
+    transform: scale(1.1);
+}
+
+.btn-whatsapp-flutuante svg {
+    width: 35px;
+    height: 35px;
+    fill: currentColor;
+}
+
+/* Ícone do Instagram na seção Sobre e Footer */
+.redes-sociais-footer {
+    margin-bottom: 1rem;
+}
+
+.icone-inline-sobre, .redes-sociais-footer a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--cor-primaria);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.redes-sociais-footer a {
+    color: #999; /* Cor base mais apagada no rodapé */
+    margin-top: 0;
+    margin: 0 10px; /* Adicionado margem para separar os ícones */
+}
+
+.icone-inline-sobre:hover, .redes-sociais-footer a:hover {
+    color: var(--cor-secundaria);
+    transform: scale(1.1);
+}
+
+/* Efeito de cor específica para cada ícone no hover do rodapé */
+.redes-sociais-footer a.instagram-footer:hover {
+        color: #E1306C; /* Cor do Instagram */
+}
+
+.redes-sociais-footer a.whatsapp-footer:hover {
+        color: #25D366; /* Cor do WhatsApp */
+}
+
+.icone-inline-sobre svg, .redes-sociais-footer a svg {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+}
+
+/* ==========================================================================
+    10. RESPONSIVIDADE (Mobile)
+    ========================================================================== */
+@media (max-width: 900px) {
+    .menu-navegacao { display: none; }
+    .menu-btn { display: block; }
+    .contato-rapido { display: none; }
+
+    .menu-navegacao {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--cor-primaria);
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+        margin-bottom: 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    }
+
+    .menu-navegacao a {
+        padding: 1.5rem;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        font-size: 1rem; /* Volta o tamanho pra facilitar clique */
+    }
+
+    #menu-toggle:checked ~ .menu-navegacao { height: 260px; }
+    #menu-toggle:checked ~ .menu-btn .menu-icon { background-color: transparent; }
+    #menu-toggle:checked ~ .menu-btn .menu-icon::before { transform: rotate(45deg); top: 0; }
+    #menu-toggle:checked ~ .menu-btn .menu-icon::after { transform: rotate(-45deg); top: 0; }
+}
+
+@media (max-width: 768px) {
+    #hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .hero-texto h1 { font-size: 2.5rem; }
+    .hero-imagem::before { display: none; }
+
+    .sobre-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
