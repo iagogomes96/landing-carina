@@ -1,9 +1,9 @@
 // ==========================================================================
-// 1. CONFIGURAÇÕES GERAIS DO SITE (O JSON que você pediu)
+// 1. CONFIGURAÇÕES GERAIS DO SITE
 // ==========================================================================
 const siteConfig = {
-    telefoneVisor: "(11) 98175-7939",
-    whatsappLink: "https://wa.me/5511981757939",
+    telefoneVisor: "(11) 97583-7636",
+    whatsappLink: "https://wa.me/5511975837636",
     mensagemWhatsapp: "Olá! Acessei o seu site e gostaria de agendar uma consulta.",
     instagramLink: "https://instagram.com/espirita_carina", 
     enderecoLinha1: "Rua Princesa Isabel, 528 - Brooklin Paulista, São Paulo - SP",
@@ -14,14 +14,26 @@ const siteConfig = {
         "eZzmso11vxM", 
         "qO8hYxBs0Fw", 
         "XPvKMyimo18"  
+    ],
+
+    // Imagens para o carrossel
+    galeriaImagens: [
+        "src/img/carrossel/carina-1.webp",
+        "src/img/carrossel/carina-2.webp",
+        "src/img/carrossel/carina-3.webp",
+        "src/img/carrossel/carina-4.webp",
+        "src/img/carrossel/carina-5.webp",
+        "src/img/carrossel/carina-6.webp",
+        "src/img/carrossel/carina-7.webp",
+        "src/img/carrossel/carina-8.webp",
+        "src/img/carrossel/carina-9.webp",
+        "src/img/carrossel/carina-10.webp"
     ]
 };
 
 // ==========================================================================
-// HEADER SCROLL EFFECT (Otimizado)
+// HEADER SCROLL EFFECT
 // ==========================================================================
-// O threshold foi ajustado para 100px para garantir que ele só apareça
-// quando realmente sair da área inicial da hero.
 window.addEventListener('scroll', () => {
     const header = document.getElementById('main-header');
     if (window.scrollY > 100) { 
@@ -32,7 +44,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ==========================================================================
-// 2. INJETOR DE DADOS
+// 2. INJETOR DE DADOS (DOM)
 // ==========================================================================
 function carregarConfiguracoes() {
     document.getElementById('txt-telefone').textContent = siteConfig.telefoneVisor;
@@ -54,22 +66,64 @@ function carregarConfiguracoes() {
     const linkWhatsappFooter = document.getElementById('link-whatsapp-footer');
     if (linkWhatsappFooter) linkWhatsappFooter.href = linkWhatsappComMensagem;
 
+    /* ---> CARREGAR DEPOIMENTOS <--- */
     const gridVideos = document.getElementById('grid-videos-dinamico');
     let htmlVideos = '';
-
     siteConfig.videosDepoimentos.forEach((videoId, index) => {
         const delayCascata = (index + 1) * 0.2;
         htmlVideos += `
             <div class="video-container revelar" style="transition-delay: ${delayCascata}s;">
-                <iframe src="https://www.youtube.com/embed/${videoId}?rel=0" title="Depoimento Cliente ${index + 1}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0" title="Depoimento Cliente ${index + 1}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
     });
     gridVideos.innerHTML = htmlVideos;
+
+    /* ---> CARREGAR GALERIA DE FOTOS (COM LOOP) <--- */
+    const trackGaleria = document.getElementById('carousel-track');
+    let htmlGaleria = '';
+    siteConfig.galeriaImagens.forEach((url, i) => {
+        htmlGaleria += `
+            <div class="carousel-item" onclick="interagirGaleria('${url}')">
+                <img src="${url}" alt="Foto Galeria ${i+1}" loading="lazy">
+            </div>
+        `;
+    });
+    trackGaleria.innerHTML = htmlGaleria + htmlGaleria;
 }
 
 // ==========================================================================
-// 3. INTERAÇÕES DE UX (Menu Mobile)
+// MÓDULO DA GALERIA: LIGHTBOX E PAUSE
+// ==========================================================================
+const modalGaleria = document.getElementById('modal-galeria');
+const imgModal = document.getElementById('img-modal-galeria');
+const trackGaleria = document.getElementById('carousel-track');
+
+function interagirGaleria(url) {
+    if (window.innerWidth > 768) {
+        imgModal.src = url;
+        modalGaleria.classList.add('mostrar');
+        trackGaleria.classList.add('paused');
+    } else {
+        trackGaleria.classList.toggle('paused');
+    }
+}
+
+document.getElementById('btn-fechar-modal').addEventListener('click', fecharModal);
+
+modalGaleria.addEventListener('click', (e) => {
+    if (e.target === modalGaleria) {
+        fecharModal();
+    }
+});
+
+function fecharModal() {
+    modalGaleria.classList.remove('mostrar');
+    trackGaleria.classList.remove('paused');
+}
+
+// ==========================================================================
+// 3. INTERAÇÕES DE UX (Scroll Spy via Observer e Auto-fechar Menu)
 // ==========================================================================
 const menuToggle = document.getElementById('menu-toggle');
 const linksMenu = document.querySelectorAll('.link-menu');
@@ -82,24 +136,27 @@ linksMenu.forEach(link => {
     });
 });
 
-// Scroll Spy
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
+// NOVO SCROLL SPY: Sem reflow forçado, ultra performático para mobile
+const opçõesSpy = {
+    rootMargin: '-30% 0px -60% 0px' // Ativa o link quando a seção ocupa o centro da tela
+};
 
-    linksMenu.forEach(link => {
-        link.classList.remove('ativo');
-        if (link.getAttribute('href').includes(current)) {
-            link.classList.add('ativo');
+const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const idSecao = entry.target.getAttribute('id');
+            linksMenu.forEach(link => {
+                link.classList.remove('ativo');
+                if (link.getAttribute('href') === `#${idSecao}`) {
+                    link.add('ativo');
+                }
+            });
         }
     });
-});
+}, opçõesSpy);
+
+// Vincula o observador às seções
+sections.forEach(section => spyObserver.observe(section));
 
 // ==========================================================================
 // 4. OBSERVERS
@@ -118,9 +175,6 @@ const observarElementos = () => {
     });
 };
 
-// ==========================================================================
-// INICIALIZAÇÃO
-// ==========================================================================
 window.onload = () => {
     carregarConfiguracoes();
     setTimeout(observarElementos, 100); 

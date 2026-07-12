@@ -17,6 +17,9 @@
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+        fetchpriority="high">
 </head>
 
 <body>
@@ -26,7 +29,7 @@
         <div class="container header-content">
             <a href="#" class="logo">
                 <div class="logo-icone">
-                    <img src="src/img/logo-carina.webp" alt="">
+                    <img src="src/img/logo-carina.webp" alt="Logomarca da Espírita Carina">
                 </div>
             </a>
 
@@ -75,7 +78,7 @@
                 <div class="servicos-grid">
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/bola-de-cristal.png" alt="">
+                            <img src="src/img/bola-de-cristal.webp" alt="">
                         </div>
                         <h3>Búzios Africanos e Cartas Ciganas</h3>
                         <p>Amor, Sorte, Carreira, Família e Vidas Passadas. A consulta com os búzios africanos e/ou
@@ -84,7 +87,7 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/meditacao.png" alt="">
+                            <img src="src/img/meditacao.webp" alt="">
                         </div>
                         <h3>Limpezas</h3>
                         <p>Limpeza de seu corpo e espírito. limpeza em sua casa, empresa, no seu negócio. Para que se
@@ -92,7 +95,7 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/cristais.png" alt="">
+                            <img src="src/img/cristais.webp" alt="">
                         </div>
                         <h3>Amarração Amorosa e Afasta Rivais</h3>
                         <p>Farei o impossível para ajudá-los. trabalhos feito na sua frente. Trabalhos podem variar o
@@ -100,7 +103,7 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/quiromancia.png" alt="">
+                            <img src="src/img/quiromancia.webp" alt="">
                         </div>
                         <h3>Família</h3>
                         <p>Tenho simpatias e trabalhos para alcoolismo e drogas. Filhos problemático. Problemas de saúde
@@ -141,6 +144,21 @@
             </div>
         </section>
 
+        <!-- SEÇÃO GALERIA -->
+        <section id="galeria" class="secao-padrao">
+            <div class="container" style="max-width: 100%;"> <!-- Container 100% para o scroll bater nas bordas -->
+                <div class="container">
+                    <h2 class="titulo-secao revelar">Conheça minha <span class="texto-destaque">Trajetória</span></h2>
+                </div>
+
+                <div class="carousel-container revelar" style="transition-delay: 0.2s;">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Imagens dinâmicas geradas no JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 4. SEÇÃO DIPLOMA -->
         <section id="diploma" class="secao-padrao bg-branco">
             <div class="container">
@@ -173,7 +191,8 @@
 
                 <!-- ESPAÇO PARA O GOOGLE MAPS -->
                 <div class="mapa-container revelar">
-                    <iframe id="iframe-mapa" src="" style="border:0;" allowfullscreen="" loading="lazy"
+                    <iframe title="Mapa de localização do local de atendimento da Espírita Carina" id="iframe-mapa"
+                        src="" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -211,6 +230,12 @@
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
         </svg>
     </a>
+
+    <!-- MODAL DO CARROSSEL DE FOTOS -->
+    <div id="modal-galeria" class="modal-galeria">
+        <span class="fechar-modal" id="btn-fechar-modal">&times;</span>
+        <img class="modal-conteudo" id="img-modal-galeria" src="" alt="Imagem Ampliada">
+    </div>
 
     <!-- SCRIPT DE INTELIGÊNCIA DO SITE -->
     <script src="src/js/index.js"></script>

@@ -2,12 +2,12 @@
     1. VARIÁVEIS E RESET
     ========================================================================== */
 :root {
-    /* Paleta Refinada */
-    --cor-primaria: #2A2640; /* Roxo/Azul muito profundo */
-    --cor-secundaria: #D4AF37; /* Dourado elegante */
+    /* Cores */
+    --cor-primaria: #2A2640;
+    --cor-secundaria: #D4AF37;
     --cor-secundaria-hover: #F3C93F;
-    --cor-fundo: #F4F2F7; /* Off-white com toque violeta para seções escuras */
-    --cor-fundo-alt: #FFFFFF; /* Branco puro para seções claras */
+    --cor-fundo: #F4F2F7;
+    --cor-fundo-alt: #FFFFFF;
     --cor-texto: #4A4A4A; 
     --cor-texto-claro: #FFFFFF;
     
@@ -30,7 +30,7 @@
 
 html, body {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Trava de segurança contra barra de rolagem horizontal */
+    overflow-x: hidden;
 }
 
 body {
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-    3. CABEÇALHO E MENU (Checkbox Hack)
+    3. CABEÇALHO E MENU
     ========================================================================== */
 header {
     position: fixed;
@@ -140,7 +140,6 @@ header.header-scrolled {
     object-fit: contain;
 }
 
-/* Menu Navegação Desktop */
 .menu-navegacao {
     display: flex;
     gap: 20px;
@@ -156,16 +155,15 @@ header.header-scrolled {
     letter-spacing: 1px; 
     font-weight: 600;
     transition: transform 0.2s ease, color 0.2s ease;
-    display: inline-block; /* Necessário para o transform scale funcionar */
+    display: inline-block;
 }
 
 /* O Hover do Menu */
 .menu-navegacao a:hover {
     color: var(--cor-secundaria);
-    transform: scale(1.1); /* Zoom sutil de 10% */
+    transform: scale(1.1);
 }
 
-/* A cor amarela quando o link está ativo (Scroll Spy) */
 .menu-navegacao a.ativo {
     color: var(--cor-secundaria);
 }
@@ -183,7 +181,6 @@ header.header-scrolled {
     font-weight: 700;
 }
 
-/* Escondendo a checkbox e o botão de menu no desktop */
 #menu-toggle { display: none; }
 .menu-btn { display: none; cursor: pointer; }
 
@@ -210,16 +207,15 @@ header.header-scrolled {
 .menu-icon::after { top: 8px; }
 
 /* ==========================================================================
-    4. SEÇÃO HERO (Full-bleed Wrapper)
+    4. SEÇÃO HERO
     ========================================================================== */
 .hero-wrapper {
-    /* Fundo Parallax Místico: Imagem abstrata com um gradiente branco/violeta por cima para suavizar */
     background-image: 
                 linear-gradient(135deg, rgba(42, 38, 64, 0.85) 0%, rgba(26, 24, 41, 0.98) 100%),
                 url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* A mágica do Parallax super leve em CSS */
+    background-attachment: fixed;
     min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
@@ -266,7 +262,6 @@ header.header-scrolled {
     box-shadow: var(--sombra-forte);
     object-fit: cover;
     border: 4px solid var(--cor-fundo-alt);
-    /* Animação de respiração da imagem principal */
     animation: flutuarImagem 6s ease-in-out infinite;
 }
 
@@ -283,10 +278,9 @@ header.header-scrolled {
     z-index: -1;
     opacity: 0.5;
     animation: flutuarImagem 6s ease-in-out infinite;
-    animation-delay: 0.5s; /* Sincronia defasada com a foto */
+    animation-delay: 0.5s;
 }
 
-/* Keyframe de Levitação (Puro CSS) */
 @keyframes flutuarImagem {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-15px); }
@@ -318,8 +312,8 @@ header.header-scrolled {
 
 .sobre-imagem {
     width: 100%; 
-    aspect-ratio: 1 / 1; /* Força um quadrado perfeito independente da resolução */
-    object-fit: cover; /* Faz a foto preencher o quadrado */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 50%;
     box-shadow: var(--sombra-card);
     border: 8px solid var(--cor-secundaria);
@@ -332,7 +326,6 @@ header.header-scrolled {
     ========================================================================== */
 .servicos-grid {
     display: grid;
-    /* Grid super responsivo e modular com proteção de limite de tela */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: 2rem;
     margin-top: 3rem;
@@ -345,7 +338,6 @@ header.header-scrolled {
     text-align: center;
     box-shadow: var(--sombra-card);
     border-bottom: 4px solid transparent;
-    /* Transição dupla: uma para o mouse passar, outra pro fade-in da revelação */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease, opacity 0.8s ease, translateY 0.8s ease;
 }
 
@@ -355,12 +347,11 @@ header.header-scrolled {
     border-bottom-color: var(--cor-secundaria);
 }
 
-/* Animação em cascata (Limpando o CSS inline) */
 .servicos-grid .card-servico:nth-child(1) { transition-delay: 0s; }
 .servicos-grid .card-servico:nth-child(2) { transition-delay: 0.2s; }
 .servicos-grid .card-servico:nth-child(3) { transition-delay: 0.4s; }
 .servicos-grid .card-servico:nth-child(4) { transition-delay: 0.6s; }
-.servicos-grid .card-servico:nth-child(5) { transition-delay: 0.8s; } /* Preparado para mais */
+.servicos-grid .card-servico:nth-child(5) { transition-delay: 0.8s; }
 
 .icone-servico {
     width: 60px;
@@ -433,7 +424,6 @@ header.header-scrolled {
     height: 450px;
 }
 
-/* Força o iframe a respeitar a div responsiva */
 .mapa-container iframe {
     width: 100% !important;
     height: 100% !important;
@@ -441,17 +431,156 @@ header.header-scrolled {
 }
 
 /* ==========================================================================
-    8. REVEAL SCROLL (Animação de surgimento)
+    8. GALERIA DE FOTOS
+    ========================================================================== */
+#galeria {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#galeria .titulo-secao { color: var(--cor-texto-claro); }
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 15%; 
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--cor-primaria) 0%, transparent 100%);
+}
+
+.carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--cor-primaria) 0%, transparent 100%);
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content;
+    animation: scrollCarousel 40s linear infinite;
+}
+
+@media (min-width: 769px) {
+    .carousel-track:hover {
+        animation-play-state: paused;
+    }
+}
+.carousel-track.paused {
+    animation-play-state: paused !important;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 300px;
+    margin-right: 20px;
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+@media (min-width: 769px) {
+    .carousel-item:hover img {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes scrollCarousel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+    8. REVEAL SCROLL
     ========================================================================== */
 .revelar {
     opacity: 0;
     transform: translateY(40px);
-    /* O delay virá das variáveis do card */
 }
 
 .revelar.ativo {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* --------------------------------------
+   MODAL LIGHTBOX
+   -------------------------------------- */
+.modal-galeria {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    -webkit-backdrop-filter: blur(8px); /* Compatibilidade com Safari */
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-galeria.mostrar {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-conteudo {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: var(--borda-raio);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    border: 3px solid var(--cor-secundaria);
+    object-fit: contain;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-galeria.mostrar .modal-conteudo {
+    transform: scale(1);
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.fechar-modal:hover {
+    color: var(--cor-secundaria);
 }
 
 /* ==========================================================================
@@ -498,7 +627,6 @@ footer span {
     fill: currentColor;
 }
 
-/* Ícone do Instagram na seção Sobre e Footer */
 .redes-sociais-footer {
     margin-bottom: 1rem;
 }
@@ -511,9 +639,9 @@ footer span {
 }
 
 .redes-sociais-footer a {
-    color: #999; /* Cor base mais apagada no rodapé */
+    color: #999;
     margin-top: 0;
-    margin: 0 10px; /* Adicionado margem para separar os ícones */
+    margin: 0 10px;
 }
 
 .icone-inline-sobre:hover, .redes-sociais-footer a:hover {
@@ -521,13 +649,13 @@ footer span {
     transform: scale(1.1);
 }
 
-/* Efeito de cor específica para cada ícone no hover do rodapé */
+
 .redes-sociais-footer a.instagram-footer:hover {
-        color: #E1306C; /* Cor do Instagram */
+        color: #E1306C;
 }
 
 .redes-sociais-footer a.whatsapp-footer:hover {
-        color: #25D366; /* Cor do WhatsApp */
+        color: #25D366;
 }
 
 .icone-inline-sobre svg, .redes-sociais-footer a svg {
@@ -537,16 +665,13 @@ footer span {
 }
 
 @media (max-width: 900px) {
-    /* 1. COMPORTAMENTO DO HEADER NO MOBILE */
     header {
-        /* Inicia fora da tela, invisível e inatingível */
         transform: translateY(-100%) !important;
         opacity: 0 !important;
         pointer-events: none; 
     }
     
     header.header-scrolled {
-        /* Retorna à tela com cor sólida quando o usuário descer a página */
         transform: translateY(0) !important;
         opacity: 1 !important;
         background-color: var(--cor-primaria) !important;
@@ -556,22 +681,19 @@ footer span {
 
     .contato-rapido { display: none; }
     
-    /* 2. COMPORTAMENTO DO MENU HAMBÚRGUER (A Correção) */
     .menu-btn { 
         display: block; 
     }
 
     .menu-navegacao {
         position: absolute;
-        top: 100%; /* Fica exatamente abaixo da barra do cabeçalho */
+        top: 100%;
         left: 0;
         width: 100%;
         background-color: var(--cor-primaria);
         flex-direction: column;
         align-items: center;
         padding: 0;
-        
-        /* A Mágica do Menu: Controlado por max-height ao invés de height */
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease-in-out; 
@@ -585,15 +707,13 @@ footer span {
         text-align: center;
         border-bottom: 1px solid rgba(255,255,255,0.05);
         font-size: 1rem; 
-        display: block; /* Garante que a área clicável ocupe tudo */
+        display: block;
     }
 
-    /* Quando a checkbox é ativada, o max-height cresce, revelando o menu */
     #menu-toggle:checked ~ .menu-navegacao { 
         max-height: 400px; 
     }
     
-    /* Animação do X do Menu Hambúrguer */
     #menu-toggle:checked ~ .menu-btn .menu-icon { background-color: transparent; }
     #menu-toggle:checked ~ .menu-btn .menu-icon::before { transform: rotate(45deg); top: 0; }
     #menu-toggle:checked ~ .menu-btn .menu-icon::after { transform: rotate(-45deg); top: 0; }
@@ -606,6 +726,11 @@ footer span {
         padding-top: 2rem;
     }
 
+    .hero-wrapper {
+        background-attachment: scroll !important;
+        background-size: cover;
+    }
+
     .hero-texto h1 { font-size: 2.5rem; }
     .hero-imagem::before { display: none; }
 
@@ -614,12 +739,22 @@ footer span {
         text-align: center;
     }
 
-    /* AJUSTE: Respiro extra no rodapé para o botão não esconder o texto da Nebulabs */
+     /* GALERIA MOBILE */
+    .carousel-item {
+        width: 250px;
+        height: 250px;
+        margin-right: 15px; 
+    }
+    
+    .carousel-container::before,
+    .carousel-container::after {
+        width: 10%;
+    }
+
     footer {
         padding-bottom: 6rem; 
     }
 
-    /* AJUSTE: Reduz levemente o botão no mobile e aproxima do canto */
     .btn-whatsapp-flutuante {
         bottom: 20px;
         right: 20px;
