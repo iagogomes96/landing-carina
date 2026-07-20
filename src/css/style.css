@@ -1,10 +1,73 @@
 /* ==========================================================================
+   DECLARAÇÃO LOCAL E OTIMIZADA DE FONTES (WOFF2)
+   ========================================================================== */
+
+/* --- LATO --- */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/lato-v25-latin-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/lato-v25-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/lato-v25-latin-700.woff2') format('woff2');
+}
+
+/* --- PLAYFAIR DISPLAY --- */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/playfair-display-v40-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/playfair-display-v40-latin-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/playfair-display-v40-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/playfair-display-v40-latin-700.woff2') format('woff2');
+}
+
+/* ==========================================================================
     1. VARIÁVEIS E RESET
     ========================================================================== */
 :root {
     /* Cores */
     --cor-primaria: #2A2640;
     --cor-secundaria: #D4AF37;
+    --texto-destaque: #997A15;
     --cor-secundaria-hover: #F3C93F;
     --cor-fundo: #F4F2F7;
     --cor-fundo-alt: #FFFFFF;
@@ -80,6 +143,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+.texto-destaque-sobre {
+    color: var(--texto-destaque);
+    font-weight: 700;
+}
+
 /* Divisória sutil entre seções */
 .secao-padrao {
     padding: var(--espaco-secao);
@@ -127,6 +195,7 @@ header.header-scrolled {
 
 .logo-icone {
     width: 210px;
+    height: 105px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -292,6 +361,7 @@ header.header-scrolled {
     ========================================================================== */
 .diploma-wrapper {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     border-radius: var(--borda-raio);
     overflow: hidden;
@@ -300,7 +370,9 @@ header.header-scrolled {
 
 .diploma-wrapper img {
     width: 100%;
+    height: auto; /* Mantém a proporção matemática automaticamente */
     display: block;
+    object-fit: contain;
 }
 
 .sobre-grid {
@@ -311,16 +383,15 @@ header.header-scrolled {
 }
 
 .sobre-imagem {
-    width: 100%; 
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: var(--sombra-card);
+    width: 100% !important; 
+    height: 350px !important;
+    object-fit: cover !important; 
+    border-radius: 50% !important;
+    display: block !important;
     border: 8px solid var(--cor-secundaria);
     padding: 10px;
     background: var(--cor-fundo-alt);
 }
-
 /* ==========================================================================
     6. SEÇÃO SERVIÇOS (Grid Inteligente e Animação Limpa)
     ========================================================================== */
@@ -765,5 +836,10 @@ footer span {
     .btn-whatsapp-flutuante svg {
         width: 32px;
         height: 32px;
+    }
+}
+@media (min-width: 769px) {
+    .sobre-imagem {
+        height: 500px !important; /* Ou o tamanho que você deseja no desktop */
     }
 }

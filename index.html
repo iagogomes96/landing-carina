@@ -10,12 +10,6 @@
     <title>Espírita Carina | Trabalhos Espirituais</title>
     <link rel="shortcut icon" href="src/img/favicon.ico" type="image/x-icon">
 
-    <!-- Fontes do Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="preload" as="image"
         href="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
@@ -29,7 +23,7 @@
         <div class="container header-content">
             <a href="#" class="logo">
                 <div class="logo-icone">
-                    <img src="src/img/logo-carina.webp" alt="Logomarca da Espírita Carina">
+                    <img src="src/img/logo-carina.webp" alt="Logomarca da Espírita Carina" width="210" height="105">
                 </div>
             </a>
 
@@ -65,7 +59,12 @@
                         dedicação, respeito e sigilo para ajudar você a superar obstáculos.</p>
                 </div>
                 <div class="hero-imagem revelar" style="transition-delay: 0.2s;">
-                    <img src="src/img/carina-header.webp" alt="Espírita Carina com Velas" class="imagem-destaque">
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="src/img/carina-header-mobile.webp" width="472"
+                            height="297" fetchpriority="high">
+                        <img src="src/img/carina-header.webp" alt="Espírita Carina com Velas" class="imagem-destaque"
+                            width="487" height="305" fetchpriority="high">
+                    </picture>
                 </div>
             </section>
         </div>
@@ -78,7 +77,7 @@
                 <div class="servicos-grid">
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/bola-de-cristal.webp" alt="">
+                            <img src="src/img/bola-de-cristal.webp" alt="" width="64" height="64" loading="lazy">
                         </div>
                         <h3>Búzios Africanos e Cartas Ciganas</h3>
                         <p>Amor, Sorte, Carreira, Família e Vidas Passadas. A consulta com os búzios africanos e/ou
@@ -87,7 +86,9 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/meditacao.webp" alt="">
+                            <img src="src/img/meditacao.webp"
+                                alt="Ícone de uma pessoa meditando, simbolizando paz e tranquilidade" width="64"
+                                height="64" loading="lazy">
                         </div>
                         <h3>Limpezas</h3>
                         <p>Limpeza de seu corpo e espírito. limpeza em sua casa, empresa, no seu negócio. Para que se
@@ -95,7 +96,9 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/cristais.webp" alt="">
+                            <img src="src/img/cristais.webp"
+                                alt="Ícone de cristais energéticos, simbolizando energia e proteção" width="64"
+                                height="64" loading="lazy">
                         </div>
                         <h3>Amarração Amorosa e Afasta Rivais</h3>
                         <p>Farei o impossível para ajudá-los. trabalhos feito na sua frente. Trabalhos podem variar o
@@ -103,7 +106,9 @@
                     </div>
                     <div class="card-servico revelar">
                         <div class="icone-servico animacao-flutuar">
-                            <img src="src/img/quiromancia.webp" alt="">
+                            <img src="src/img/quiromancia.webp"
+                                alt="Ícone de quiromancia, simbolizando a leitura das palmas da mão" width="64"
+                                height="64" loading="lazy">
                         </div>
                         <h3>Família</h3>
                         <p>Tenho simpatias e trabalhos para alcoolismo e drogas. Filhos problemático. Problemas de saúde
@@ -117,7 +122,13 @@
         <section id="sobre" class="secao-padrao">
             <div class="container sobre-grid">
                 <div class="revelar">
-                    <img src="src/img/carina-sobre2.webp" alt="Espírita Carina trabalhando" class="sobre-imagem">
+                    <div class="revelar">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="src/img/carina-sobre-mobile.webp">
+                            <img src="src/img/carina-sobre.webp" alt="Espírita Carina trabalhando" class="sobre-imagem"
+                                loading="lazy">
+                        </picture>
+                    </div>
                 </div>
                 <div class="revelar" style="transition-delay: 0.2s;">
                     <h2 class="titulo-secao" style="text-align: center;">Ajudando pessoas do mundo todo</h2>
@@ -131,7 +142,7 @@
                     <p>Não confie em qualquer uma. Trabalho sério e honesto. A melhor do Brasil.
                     </p>
                     <br>
-                    <p class="texto-destaque">Trabalho sério e honesto. Sou a melhor do Brasil!</p>
+                    <p class="texto-destaque-sobre">Trabalho sério e honesto. Sou a melhor do Brasil!</p>
                     <!-- Ícone do Instagram adicionado aqui, após o texto -->
                     <a href="#" id="link-instagram-sobre" class="icone-inline-sobre" target="_blank"
                         rel="noopener noreferrer" aria-label="Instagram">
@@ -146,14 +157,14 @@
 
         <!-- SEÇÃO GALERIA -->
         <section id="galeria" class="secao-padrao">
-            <div class="container" style="max-width: 100%;"> <!-- Container 100% para o scroll bater nas bordas -->
+            <div class="container" style="max-width: 100%;">
                 <div class="container">
-                    <h2 class="titulo-secao revelar">Conheça minha <span class="texto-destaque">Trajetória</span></h2>
+                    <h2 class="titulo-secao revelar">Momentos <span class="texto-destaque">Fé</span> e <span
+                            class="texto-destaque">Luz</span></h2>
                 </div>
 
                 <div class="carousel-container revelar" style="transition-delay: 0.2s;">
                     <div class="carousel-track" id="carousel-track">
-                        <!-- Imagens dinâmicas geradas no JS -->
                     </div>
                 </div>
             </div>
@@ -164,7 +175,8 @@
             <div class="container">
                 <h2 class="titulo-secao revelar">Reconhecimento e Formação</h2>
                 <div class="diploma-wrapper revelar">
-                    <img src="src/img/carina-diploma.webp" alt="Diploma Federação Brasileira de Umbanda">
+                    <img src="src/img/carina-diploma.webp" alt="Diploma Federação Brasileira de Umbanda" width="800"
+                        height="586" loading="lazy">
                 </div>
             </div>
         </section>
@@ -174,10 +186,7 @@
             <div class="container">
                 <h2 class="titulo-secao revelar">O que dizem sobre mim</h2>
 
-                <!-- O Grid de vídeos será populado dinamicamente via JSON -->
-                <div class="videos-grid" id="grid-videos-dinamico">
-                    <!-- Vídeos entram aqui -->
-                </div>
+                <div class="videos-grid" id="grid-videos-dinamico"></div> <!-- vídeos -->
             </div>
         </section>
 
