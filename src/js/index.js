@@ -83,9 +83,12 @@ function carregarConfiguracoes() {
     const trackGaleria = document.getElementById('carousel-track');
     let htmlGaleria = '';
     siteConfig.galeriaImagens.forEach((url, i) => {
+        // Aplica o lazy loading apenas nas imagens mais distantes
+        const atributoLoading = i > 3 ? 'loading="lazy"' : '';
+        
         htmlGaleria += `
             <div class="carousel-item" onclick="interagirGaleria('${url}')">
-                <img src="${url}" alt="Foto Galeria ${i+1}" loading="lazy">
+                <img src="${url}" alt="Foto Galeria ${i+1}" ${atributoLoading} decoding="async">
             </div>
         `;
     });
@@ -100,13 +103,10 @@ const imgModal = document.getElementById('img-modal-galeria');
 const trackGaleria = document.getElementById('carousel-track');
 
 function interagirGaleria(url) {
-    if (window.innerWidth > 768) {
-        imgModal.src = url;
-        modalGaleria.classList.add('mostrar');
-        trackGaleria.classList.add('paused');
-    } else {
-        trackGaleria.classList.toggle('paused');
-    }
+    // Agora, o clique na foto abre o modal e pausa o fundo em qualquer dispositivo
+    imgModal.src = url;
+    modalGaleria.classList.add('mostrar');
+    trackGaleria.classList.add('paused');
 }
 
 document.getElementById('btn-fechar-modal').addEventListener('click', fecharModal);
@@ -175,7 +175,7 @@ const observarElementos = () => {
     });
 };
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     carregarConfiguracoes();
-    setTimeout(observarElementos, 100); 
-};
+    setTimeout(observarElementos, 100);
+});
