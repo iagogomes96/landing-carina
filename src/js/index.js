@@ -79,20 +79,55 @@ function carregarConfiguracoes() {
     });
     gridVideos.innerHTML = htmlVideos;
 
-    /* ---> CARREGAR GALERIA DE FOTOS (COM LOOP) <--- */
-    const trackGaleria = document.getElementById('carousel-track');
-    let htmlGaleria = '';
-    siteConfig.galeriaImagens.forEach((url, i) => {
-        // Aplica o lazy loading apenas nas imagens mais distantes
-        const atributoLoading = i > 3 ? 'loading="lazy"' : '';
-        
-        htmlGaleria += `
-            <div class="carousel-item" onclick="interagirGaleria('${url}')">
-                <img src="${url}" alt="Foto Galeria ${i+1}" ${atributoLoading} decoding="async">
-            </div>
-        `;
+    // ==========================================================================
+// MÓDULO DO CARROSSEL: PROGRESSIVE ENHANCEMENT E LAZY HYDRATION
+// ==========================================================================
+const carouselContainer = document.querySelector('.carousel-container');
+const trackGaleria = document.getElementById('carousel-track');
+let carrosselIniciado = false;
+
+// Observador para carregar o resto do carrossel antes de aparecer na tela
+const carouselObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        // Se a seção estiver perto de entrar na tela (rootMargin garante isso)
+        if (entry.isIntersecting && !carrosselIniciado) {
+            carrosselIniciado = true;
+            
+            // 1. Pega apenas a partir da 5ª imagem (índice 4)
+            const imagensRestantes = siteConfig.galeriaImagens.slice(4); 
+            let htmlRestante = '';
+            
+            imagensRestantes.forEach((url, i) => {
+                htmlRestante += `
+                    <div class="carousel-item" onclick="interagirGaleria('${url}')">
+                        <img src="${url}" alt="Foto Galeria ${i+5}" loading="lazy" decoding="async">
+                    </div>
+                `;
+            });
+            
+            // 2. Injeta as imagens 5 a 10 no HTML
+            trackGaleria.insertAdjacentHTML('beforeend', htmlRestante);
+            
+            // 3. Duplica todo o conteúdo atual (1 a 10) para criar a ilusão de loop infinito
+            trackGaleria.innerHTML += trackGaleria.innerHTML;
+            
+            // 4. Inicia a animação CSS (aguarda um micro-instante para o navegador renderizar o HTML novo)
+            requestAnimationFrame(() => {
+                trackGaleria.classList.add('animar');
+            });
+            
+            // 5. Desliga o observador para não rodar novamente
+            observer.unobserve(entry.target);
+        }
     });
-    trackGaleria.innerHTML = htmlGaleria + htmlGaleria;
+}, { 
+    // Magia negra aqui: Inicia a lógica 300px ANTES do carrossel aparecer na tela
+    rootMargin: '300px 0px' 
+});
+
+if (carouselContainer) {
+        carouselObserver.observe(carouselContainer);
+    }
 }
 
 // ==========================================================================
